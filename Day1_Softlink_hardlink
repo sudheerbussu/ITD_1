@@ -1,0 +1,55 @@
+To change the Timezone in Linux 
+
+Method_1: using TZ environment variable 
+
+                    1. export TZ=<timezone_required>
+
+Method_2: Using timedatectl
+ 
+                    1. timedatectl list-timezones
+
+                    2. sudo timedatectl set-timezone <timezone_required_from_prvious_command>
+
+                        ex: sudo timedatectl set-timezone Asia/Calcutta
+
+Method_2: Using files /etc/localtime
+
+                    1. sudo rm -rf /etc/localtime
+                    2. sudo ln -s /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+
+ 
+
+inode of a file
+
+An inode (short for Index Node) is a data structure used by file systems in Unix-like operating systems to store metadata about a file or directory.
+It contains information about the file, but not the actual data (the contents of the file). Each file or directory on a filesystem is associated with a unique inode.
+inode allows the operating system to find the file's metadata quickly without needing to examine the file's content.
+The inode stores critical information such as:
+File type: Whether it's a regular file, directory, symbolic link, etc.
+Permissions: File access rights (read, write, execute for owner, group, others).
+Owner: The user and group that own the file.
+Size: The size of the file in bytes.
+Timestamps: Various time-related attributes
+ctime (inode change time) — when the inode was last changed.
+mtime (modification time) — when the file's content was last modified.
+atime (access time) — when the file was last accessed.
+Link count: The number of hard links pointing to the inode. When the link count reaches zero, the file is deleted from the filesystem.
+Pointers to data blocks: Addresses of the actual data blocks where the file contents are stored. This allows the system to locate the file's data on disk.
+
+To get the inode of a file: ls -i <file_name>
+To list inode number of all files and directories: ls -i 
+
+Hard Link 
+
+A hard link is essentially an additional directory entry for an existing file. Both the original file and the hard link refer to the same underlying inode (the source file which contains the actual data of the file).
+
+ln target_file symlink_name
+
+EX:  ln old_name.docx new_name.docx
+
+Soft Link | Symbolic Link | Symlink
+
+A soft link is a separate file with its own inode, which stores the path to the target file. This means that a soft link is a "pointer" to the original file, rather than another reference to the inode another file.
+
+ln -s target_file symlink_name
+EX:  ln -s old_name.docx new_name.docx
